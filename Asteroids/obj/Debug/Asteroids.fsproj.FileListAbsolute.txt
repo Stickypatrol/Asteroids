@@ -18,3 +18,6 @@ C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\OpenTK.dll
 C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\FSharp.Core.xml
 C:\Users\Windows\Desktop\Asteroids\Asteroids\obj\Debug\Asteroids.exe
 C:\Users\Windows\Desktop\Asteroids\Asteroids\obj\Debug\Asteroids.pdb
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\Asteroids.XML
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\obj\Debug\Asteroids.exe
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\obj\Debug\Asteroids.pdb
