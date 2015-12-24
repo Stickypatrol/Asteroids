@@ -8,3 +8,13 @@ C:\Users\Windows\Desktop\Asteroids\Asteroids\Asteroids\bin\Debug\OpenTK.dll
 C:\Users\Windows\Desktop\Asteroids\Asteroids\Asteroids\bin\Debug\FSharp.Core.xml
 C:\Users\Windows\Desktop\Asteroids\Asteroids\Asteroids\obj\Debug\Asteroids.exe
 C:\Users\Windows\Desktop\Asteroids\Asteroids\Asteroids\obj\Debug\Asteroids.pdb
+C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\Asteroids.exe.config
+C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\Asteroids.XML
+C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\Asteroids.exe
+C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\Asteroids.pdb
+C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\FSharp.Core.dll
+C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\MonoGame.Framework.dll
+C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\OpenTK.dll
+C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\FSharp.Core.xml
+C:\Users\Windows\Desktop\Asteroids\Asteroids\obj\Debug\Asteroids.exe
+C:\Users\Windows\Desktop\Asteroids\Asteroids\obj\Debug\Asteroids.pdb

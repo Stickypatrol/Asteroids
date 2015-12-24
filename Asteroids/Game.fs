@@ -14,27 +14,40 @@ open GameState
 
 //The base game class provided by MonoGame
 type AsteroidsGame () as context =
-  inherit Game ()
+    inherit Game ()
+  
+    let mutable graphics = new GraphicsDeviceManager (context)
+    let mutable spriteBatch = null
+    let mutable gameState = GameState.Zero
 
-  //let mutable gameState = GameState.Zero
+    override context.Initialize () =
+        graphics.GraphicsProfile <- GraphicsProfile.HiDef
+        context.Content.RootDirectory <- "Content"
+        spriteBatch <- new SpriteBatch (context.GraphicsDevice)
 
-  override context.Initialize () =
-    context.Content.RootDirectory <- "Content"
-    base.Initialize ()
-    ()
+        gameState <-
+            {
+                Players        = ActorWrapper<Player>.Zero
+                Asteroids      = ActorWrapper<Asteroid>.Zero
+                Projectiles    = ActorWrapper<Projectile>.Zero
+                Textures       = Map.empty
+            }
 
-  override context.LoadContent () =
-    base.LoadContent ()
-    ()
+        base.Initialize ()
+        ()
 
-  override context.Update gameTime =
-    base.Update gameTime
-    ()
+    override context.LoadContent () =
+        base.LoadContent ()
+        ()
 
-  override context.Draw gameTime =
-    context.GraphicsDevice.Clear Color.CornflowerBlue
-    //spriteBatch.Begin ()
+    override context.Update gameTime =
+        base.Update gameTime
+        ()
 
-    //spriteBatch.End ()
-    base.Draw gameTime
-    ()
+    override context.Draw gameTime =
+        context.GraphicsDevice.Clear Color.CornflowerBlue
+        spriteBatch.Begin ()
+
+        spriteBatch.End ()
+        base.Draw gameTime
+        ()

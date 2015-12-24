@@ -14,8 +14,6 @@ type GameState =
     Players        : ActorWrapper<Player>
     Asteroids      : ActorWrapper<Asteroid>
     Projectiles    : ActorWrapper<Projectile>
-    GraphicsDevice : GraphicsDeviceManager Option
-    SpriteBatch    : SpriteBatch Option
     Textures       : Map<string, Texture2D Option>
   }
   with
@@ -24,7 +22,5 @@ type GameState =
       Players        = ActorWrapper<Player>.Zero
       Asteroids      = ActorWrapper<Asteroid>.Zero
       Projectiles    = ActorWrapper<Projectile>.Zero
-      GraphicsDevice = None
-      SpriteBatch    = None
       Textures       = Map.empty
     }
