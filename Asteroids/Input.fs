@@ -12,6 +12,8 @@ type MouseInput =
 //A conversion from an action(key) to an output(transformation action)
 type InputBehavior<'a> = Map<Keys, 'a -> 'a>
 
+//we need to deal with the mouse input differently than
+//the keyboard input so we can combine them if needed
 let checkRightButton mouselist =
   if Mouse.GetState().LeftButton = ButtonState.Pressed then
     MouseInput.RightButton::mouselist
@@ -32,7 +34,7 @@ let checkLeftButton () =
 
 let ProcessInput (beh : InputBehavior<'a>) =
   fun elem ->
-  let pressedKeys = Keyboard.GetState().GetPressedKeys() |> List.ofArray
-  List.fold (fun elem key ->  match (beh.TryFind <| key) with
-                              | Some func -> func elem
-                              | None -> elem) elem pressedKeys
+    let KBinput = List.ofArray <| Keyboard.GetState().GetPressedKeys()
+    List.fold (fun elem key ->  match (beh.TryFind <| key) with
+                                | Some func -> func elem
+                                | None -> elem) elem KBinput

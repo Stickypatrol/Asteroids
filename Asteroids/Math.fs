@@ -58,3 +58,10 @@ type Vector2<[<Measure>] 'a> =
       v / v.Length
   member this.ToXNA : Vector2 =
       Vector2(this.X |> float32, this.Y |> float32)
+
+let Vec2 x y =
+  {X = x; Y = y}//this is a proposal to add this little helper function
+                //to make the creation of vector2s more readable
+                //shall we use this?
+let toGameTime ms =
+  ms |> float |> (/) 1000.0<s>

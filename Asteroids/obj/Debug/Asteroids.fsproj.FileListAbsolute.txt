@@ -18,3 +18,33 @@ C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\OpenTK.dll
 C:\Users\Windows\Desktop\Asteroids\Asteroids\bin\Debug\FSharp.Core.xml
 C:\Users\Windows\Desktop\Asteroids\Asteroids\obj\Debug\Asteroids.exe
 C:\Users\Windows\Desktop\Asteroids\Asteroids\obj\Debug\Asteroids.pdb
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\Asteroids.exe.config
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\Asteroids.XML
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\Asteroids.exe
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\Asteroids.pdb
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\FSharp.Core.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\MonoGame.Framework.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\System.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\System.Numerics.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\MonoGame.Framework.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\FSharp.Core.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\obj\Debug\Asteroids.exe
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\obj\Debug\Asteroids.pdb
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.XAudio2.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.DXGI.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.XInput.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.RawInput.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.XAudio2.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.Direct3D11.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.DXGI.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.Direct2D1.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.XInput.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.RawInput.xml
+C:\Users\Bob\Documents\Visual Studio 2015\Projects\Asteroids\Asteroids\bin\Debug\SharpDX.Direct3D9.xml
