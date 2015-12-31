@@ -8,6 +8,7 @@ open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 open Actors
 open Math
+open Media
 
 type GameState =
   {
@@ -54,5 +55,13 @@ type GameState =
                         Create = Projectile.Create;
                         Remove = Projectile.Remove;
                         }
-      Textures       = Map.empty//next thing to add is actual textures
+      Textures       = Map.empty<string, Option<Texture2D>>
+    }
+  static member LoadTextures gs content =
+    { gs with
+        Textures = ["player", (loadTexture content "player")
+                    "asteroid", (loadTexture content "asteroid")
+                    "projectile", (loadTexture content "projectile")
+                    ] |> Map.ofList
+      
     }

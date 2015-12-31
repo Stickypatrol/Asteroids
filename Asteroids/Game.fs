@@ -26,6 +26,7 @@ type AsteroidsGame () as context =
         graphics.GraphicsProfile <- GraphicsProfile.HiDef
         context.Content.RootDirectory <- "Content"
         spriteBatch <- new SpriteBatch (context.GraphicsDevice)
+        gameState <- gameState.LoadTextures gameState context.Content
         base.Initialize ()
         ()
 
