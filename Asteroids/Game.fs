@@ -23,10 +23,10 @@ type AsteroidsGame () as context =
     let mutable gameState = GameState.Zero
 
     override context.Initialize () =
+        base.Content.RootDirectory <- "Content"
         graphics.GraphicsProfile <- GraphicsProfile.HiDef
-        context.Content.RootDirectory <- "Content"
         spriteBatch <- new SpriteBatch (context.GraphicsDevice)
-        gameState <- gameState.LoadTextures gameState context.Content
+        gameState <- GameState.LoadTextures gameState context.Content
         base.Initialize ()
         ()
 

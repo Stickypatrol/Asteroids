@@ -29,7 +29,8 @@ type GameState =
         let tex = match (gs.Textures.TryFind name) with
                   | Some tex -> tex
                   | None -> failwith "no appropriate texture found"
-        sb.Draw(tex.Value, (b.Position.ToXNA), Color.White)
+        let rect = System.Nullable(Rectangle(0, 0, tex.Value.Width, tex.Value.Height))
+        sb.Draw(tex.Value, (b.Position.ToXNA), rect, Color.White, float32<| b.Orientation, Vector2(float32 <| tex.Value.Width/2, float32 <| tex.Value.Height/2), 1.0f, SpriteEffects.None, 0.0f)
     printfn "draw"//I know this is ugly we should fix this somehow, throwing an error is not very pretty
     List.iter (fun (pl : Player) -> Draw pl.Body pl.Name) gs.Players.Actors
     List.iter (fun (ast : Asteroid) -> Draw ast.Body ast.Name) gs.Asteroids.Actors
@@ -38,7 +39,7 @@ type GameState =
     {//we have to declare the actorwrappers here because we have to give specific implementations
     //for each of their functions somewhere, and this is the most centralized location
       Players        = {
-                        Actors = [Player.Zero]
+                        Actors = [Player.Start]
                         Update = Player.Update;
                         Create = Player.Create;
                         Remove = Player.Remove;

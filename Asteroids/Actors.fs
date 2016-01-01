@@ -9,6 +9,7 @@ open Microsoft.Xna.Framework.Input
 open Math
 open Input
 
+
 //Physical body of entities in the game world
 type Body =
   {
@@ -25,10 +26,10 @@ type Body =
       Dimensions  = Vector2<p>.Zero
       Orientation = 0.0
     }
-  static member Move (b : Body) (dt : float<s>) = 
+  static member Move (b : Body) (dt : float<s>) =
     {b with Position = b.Position + b.Velocity * dt}//this function applies the velocity to the position
   static member TransformVel (b : Body) (vel : Vector2<p/s>) =
-    {b with Velocity = b.Velocity + vel}//this function is for transforming the velocity
+    {b with Velocity = b.Velocity + vel}//this function is for transforming the velocity, we need a calculation here that takes the rotation into account
   static member TransformOri (b : Body) (orient : float) =
     {b with Orientation = b.Orientation + orient}//this function is for transforming the orientations
 //removed the ship typeclass and gave the player a body instead of a ship to keep consistency across typeclasses
@@ -42,8 +43,13 @@ type Player =
   with
   static member Update player dt =
     let player' = ProcessInput player.InputBehavior player
-    {player' with//this function first updates the body of the object
-      Body = Body.Move player'.Body dt}//and then applies the appropriate velocity
+    let limitedPlayer =
+      {player' with Body =
+                    {player'.Body with  Velocity = LimitVecAbs (>) {X = 0.05<p/s>; Y = 0.05<p/s>} player'.Body.Velocity
+                                        Position = Middelize (LimitVecAbs (>) {X = 400.0<p>; Y = 240.0<p>})
+                                                                    {X = 400.0<p>; Y = 240.0<p>} player'.Body.Position}} //then clamps the speed to the limit for the ship
+    {limitedPlayer with//this function first updates the body of the object
+      Body = Body.Move limitedPlayer.Body dt}//and then applies the appropriate velocity
   static member Create () =
     List<Player>.Empty//for now there is no create function, it just returns an empty list
   static member Remove player world : bool =
@@ -52,14 +58,30 @@ type Player =
   static member Zero =
     {
       Body          = Body.Zero
-      Name          = "Player"
+      Name          = "player"
       Score         = 0
       InputBehavior =
         [//here is an example of how imho it makes it a little more readable, we can use it but need to be consistent
-          Keys.W, fun pl -> {pl with Body = Body.TransformVel pl.Body (Vec2 -5.0<p/s> 0.0<p/s>)}
-          Keys.S, fun pl -> {pl with Body = Body.TransformVel pl.Body (Vec2 5.0<p/s> 0.0<p/s>)}
-          Keys.A, fun pl -> {pl with Body = Body.TransformOri pl.Body 0.05}
-          Keys.D, fun pl -> {pl with Body = Body.TransformOri pl.Body -0.05}
+          Keys.W, fun pl -> {pl with Body = Body.TransformVel pl.Body {X = 0.0<p/s>; Y = -0.003<p/s>}}
+          Keys.S, fun pl -> {pl with Body = Body.TransformVel pl.Body {X = 0.0<p/s>; Y = 0.003<p/s>}}
+          Keys.A, fun pl -> {pl with Body = Body.TransformVel pl.Body {X = -0.003<p/s>; Y = 0.0<p/s>}}
+          Keys.D, fun pl -> {pl with Body = Body.TransformVel pl.Body {X = 0.003<p/s>; Y = 0.0<p/s>}}
+        ] |> Map.ofList
+    }
+  static member Start =
+    {
+      Body          = { Position = {X = 400.0<p>;Y = 240.0<p>};
+                        Velocity = {X = 0.0<p/s>;Y = 0.0<p/s>};
+                        Dimensions = {X = 0.0<p>;Y = 0.0<p>};
+                        Orientation = 0.0}
+      Name          = "player"
+      Score         = 0
+      InputBehavior =
+        [//here is an example of how imho it makes it a little more readable, we can use it but need to be consistent
+          Keys.W, fun pl -> {pl with Body = Body.TransformVel pl.Body {X = 0.0<p/s>; Y = -0.003<p/s>}}
+          Keys.S, fun pl -> {pl with Body = Body.TransformVel pl.Body {X = 0.0<p/s>; Y = 0.003<p/s>}}
+          Keys.A, fun pl -> {pl with Body = Body.TransformVel pl.Body {X = -0.003<p/s>; Y = 0.0<p/s>}}
+          Keys.D, fun pl -> {pl with Body = Body.TransformVel pl.Body {X = 0.003<p/s>; Y = 0.0<p/s>}}
         ] |> Map.ofList
     }
 

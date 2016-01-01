@@ -59,9 +59,52 @@ type Vector2<[<Measure>] 'a> =
   member this.ToXNA : Vector2 =
       Vector2(this.X |> float32, this.Y |> float32)
 
-let Vec2 x y =
-  {X = x; Y = y}//this is a proposal to add this little helper function
-                //to make the creation of vector2s more readable
-                //shall we use this?
 let toGameTime ms =
   ms |> float |> (/) 1000.0<s>
+
+let Limit op (l:'a) =
+  fun (x:'a) ->
+    match x with
+    | x when op x l -> l
+    | _ -> x
+
+let LimitAbsint op (l:int) =
+  fun (x:int) ->
+    match x with
+    | x when op x l -> l
+    | x when op -x l -> -l
+    | _ -> x
+
+let LimitAbs op (l:float) =
+  fun (x:float) ->
+    match x with
+    | x when op x l -> l
+    | x when op -x l -> -l
+    | _ -> x
+
+let LimitVecAbs op (l:Vector2<'a>) =
+  fun (z:Vector2<'a>) ->
+    match z with
+    | z when op z.X l.X && op z.Y l.Y -> {X = l.X; Y = l.Y}
+    | z when op z.X l.X && not (op z.Y -l.Y) -> {X = l.X; Y = -l.Y}
+    | z when not (op z.X -l.X) && not (op z.Y -l.Y) -> {X = -l.X; Y = -l.Y}
+    | z when not (op z.X -l.X) && op z.Y l.Y -> {X = -l.X; Y = l.Y}
+    | z when op z.X l.X -> {X = l.X; Y = z.Y}
+    | z when op z.Y l.Y -> {X = z.X; Y = l.Y}
+    | z when not (op z.X -l.X) -> {X = -l.X; Y = z.Y}
+    | z when not (op z.Y -l.Y) -> {X = z.X; Y = -l.Y}
+    | _ -> z
+
+let Middelize (func:Vector2<'a> -> Vector2<'a>) (offset:Vector2<'a>) (vec:Vector2<'a>) =
+  (func (vec - offset)) + offset
+
+type Rectangle<[<Measure>] 'a > =
+  {
+    Height : float<'a>
+    Width  : float<'a>
+    X      : float<'a>
+    Y      : float<'a>
+  }
+  with
+  member this.ToXNA : Rectangle =
+    Rectangle(this.Height |> int, this.Width |> int, this.X |> int, this.Y |> int)
