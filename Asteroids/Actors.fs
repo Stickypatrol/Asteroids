@@ -8,6 +8,7 @@ open Microsoft.Xna.Framework.Graphics
 open Microsoft.Xna.Framework.Input
 open Math
 open Input
+open CstateMonad
 
 
 //Physical body of entities in the game world
@@ -144,10 +145,12 @@ type ActorWrapper<'a, 's> =
     Remove : 'a -> 's -> bool
   }
   with
-  static member UpdateAll (wrpr : ActorWrapper<'a, 's>) state dt =
-    {wrpr with Actors =
-                (wrpr.Create()) @ [for e in wrpr.Actors do
-                                    if not (wrpr.Remove e state) then
-                                      let e' = wrpr.Update e dt
-                                      yield e']}
+  static member UpdateAll dt (wrpr : ActorWrapper<'a, 's>) =
+    fun gs ->
+      let Actors' = (wrpr.Create()) @ [for e in wrpr.Actors do
+                                        if not (wrpr.Remove e gs) then
+                                          let e' = wrpr.Update e dt
+                                          yield e']
+      Done({wrpr with Actors = Actors'}, gs)
+                  
 //changed the static functions to take the additional necessary parameters

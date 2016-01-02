@@ -19,15 +19,17 @@ type GameState =
     Textures       : Map<string, Texture2D Option>
   }
   with
+  static member Disassemble =
+    fun (gs:GameState) ->
+      Done((gs.Players, gs.Asteroids, gs.Projectiles, gs.Textures), gs)
   static member GameUpdate (dt : float<s>) =
-    fun (gs : GameState) ->
-      let Players' = ActorWrapper<Player, GameState>.UpdateAll gs.Players gs dt
-      let Asteroids' = ActorWrapper<Asteroid, GameState>.UpdateAll gs.Asteroids gs dt
-      let Projectiles' = ActorWrapper<Projectile, GameState>.UpdateAll gs.Projectiles gs dt
-      Done((), {(gs:GameState) with
-                  Players = Players'
-                  Asteroids = Asteroids'
-                  Projectiles = Projectiles'})
+    cs{
+      let! play, ast, proj, tex = GameState.Disassemble
+      let! players' = ActorWrapper<Player, GameState>.UpdateAll dt play
+      let! asteroids' = ActorWrapper<Asteroid, GameState>.UpdateAll dt ast
+      let! projectiles' = ActorWrapper<Projectile, GameState>.UpdateAll dt proj
+      return ()
+    }
   static member GameDraw (gs : GameState) (sb : SpriteBatch) =
     let Draw =
       fun (b : Body) (name : string) ->
@@ -35,8 +37,8 @@ type GameState =
                   | Some tex -> tex
                   | None -> failwith "no appropriate texture found"
         let rect = System.Nullable(Rectangle(0, 0, tex.Value.Width, tex.Value.Height))
-        sb.Draw(tex.Value, (b.Position.ToXNA), rect, Color.White, float32<| b.Orientation, Vector2(float32 <| tex.Value.Width/2, float32 <| tex.Value.Height/2), 1.0f, SpriteEffects.None, 0.0f)
-    printfn "draw"//I know this is ugly we should fix this somehow, throwing an error is not very pretty
+        sb.Draw(tex.Value, (b.Position.ToXNA), rect, Color.White, float32<| b.Orientation,
+                Vector2(float32 <| tex.Value.Width/2, float32 <| tex.Value.Height/2), 1.0f, SpriteEffects.None, 0.0f)
     List.iter (fun (pl : Player) -> Draw pl.Body pl.Name) gs.Players.Actors
     List.iter (fun (ast : Asteroid) -> Draw ast.Body ast.Name) gs.Asteroids.Actors
     List.iter (fun (pro : Projectile) -> Draw pro.Body pro.Name) gs.Projectiles.Actors
