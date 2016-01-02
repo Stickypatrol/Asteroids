@@ -10,7 +10,7 @@ open Microsoft.Xna.Framework.Content
 open Microsoft.Xna.Framework.Graphics
 open Media
 open Actors
-open StateMonad
+open CstateMonad
 open GameState
 open Math
 
@@ -36,7 +36,8 @@ type AsteroidsGame () as context =
 
     override context.Update gameTime =
         base.Update gameTime
-        gameState <- GameState.GameUpdate gameState (toGameTime <| gameTime.ElapsedGameTime.Milliseconds)
+        //here we run the mainUpdate function and return the 2nd(the state) item in the tuple it returns
+        gameState <- snd(GameState.GameUpdate (toGameTime <| gameTime.ElapsedGameTime.Milliseconds) gameState)
         ()
 
     override context.Draw gameTime =

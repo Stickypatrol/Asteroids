@@ -9,6 +9,7 @@ open Microsoft.Xna.Framework.Graphics
 open Actors
 open Math
 open Media
+open CstateMonad
 
 type GameState =
   {
@@ -18,11 +19,15 @@ type GameState =
     Textures       : Map<string, Texture2D Option>
   }
   with
-  static member GameUpdate (gs : GameState) (dt : float<s>) =
-    {(gs:GameState) with
-      Players = ActorWrapper<Player, GameState>.UpdateAll gs.Players gs dt
-      Asteroids = ActorWrapper<Asteroid, GameState>.UpdateAll gs.Asteroids gs dt
-      Projectiles = ActorWrapper<Projectile, GameState>.UpdateAll gs.Projectiles gs dt}
+  static member GameUpdate (dt : float<s>) =
+    fun (gs : GameState) ->
+      let Players' = ActorWrapper<Player, GameState>.UpdateAll gs.Players gs dt
+      let Asteroids' = ActorWrapper<Asteroid, GameState>.UpdateAll gs.Asteroids gs dt
+      let Projectiles' = ActorWrapper<Projectile, GameState>.UpdateAll gs.Projectiles gs dt
+      Done((), {(gs:GameState) with
+                  Players = Players'
+                  Asteroids = Asteroids'
+                  Projectiles = Projectiles'})
   static member GameDraw (gs : GameState) (sb : SpriteBatch) =
     let Draw =
       fun (b : Body) (name : string) ->
