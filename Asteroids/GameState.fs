@@ -19,17 +19,17 @@ type GameState =
     Textures       : Map<string, Texture2D Option>
   }
   with
-  static member Disassemble =
-    fun (gs:GameState) ->
-      Done((gs.Players, gs.Asteroids, gs.Projectiles, gs.Textures), gs)
+  static member Disassemble gs =
+    gs.Players, gs.Asteroids, gs.Projectiles, gs.Textures
   static member GameUpdate (dt : float<s>) =
-    cs{
-      let! play, ast, proj, tex = GameState.Disassemble
-      let! players' = ActorWrapper<Player, GameState>.UpdateAll dt play
-      let! asteroids' = ActorWrapper<Asteroid, GameState>.UpdateAll dt ast
-      let! projectiles' = ActorWrapper<Projectile, GameState>.UpdateAll dt proj
-      return ()
-    }
+    fun gs ->
+      let play, ast, proj, tex = GameState.Disassemble gs
+      let players' = ActorWrapper<Player, GameState>.UpdateAll dt play gs
+      let asteroids' = ActorWrapper<Asteroid, GameState>.UpdateAll dt ast gs
+      let projectiles' = ActorWrapper<Projectile, GameState>.UpdateAll dt proj gs
+      ((), {gs with Players = players'
+                    Asteroids = asteroids'
+                    Projectiles = projectiles'})
   static member GameDraw (gs : GameState) (sb : SpriteBatch) =
     let Draw =
       fun (b : Body) (name : string) ->
