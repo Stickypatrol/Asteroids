@@ -1,7 +1,14 @@
-﻿module NetworkInfo
+﻿module ClientInfo
 
 open Math
-open Actors
+
+type Body =
+  {
+    Position       : Vector2<p>
+    Velocity       : Vector2<p/s>
+    Dimensions     : Vector2<p>
+    Orientation    : float
+  }
 
 type NETPlayer =
   {
@@ -25,3 +32,13 @@ type NETState =
     Asteroids      : List<NETAsteroid>
     Projectiles    : List<NETProjectile>
   }
+
+type TimeStamp = int
+
+type NETStateStack = List<NETState* TimeStamp>
+
+(*
+what we need to do is strip every state after execution to a NETState
+then we tack the state onto the head of the NETStateStack, and pop the final one
+
+*)

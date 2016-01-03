@@ -3,12 +3,6 @@
 open System
 open ClientInfo
 
-let getTime () : int =
-  let time = DateTime.Now
-  time.Millisecond +
-  (time.Second * 1000) +
-  (time.Minute * 60000)
-let startGame () : NETStateStack =
-  
-
-let stateStack = []
+let rec runGame (curState : NETState) : NETState =
+  {Players = []; Asteroids = []; Projectiles = []; Time = 0}
+//simulate the game with the received state here until we get a new update from the server

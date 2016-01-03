@@ -31,8 +31,5 @@ type NETState =
     Players        : List<NETPlayer>
     Asteroids      : List<NETAsteroid>
     Projectiles    : List<NETProjectile>
+    Time           : int
   }
-
-type TimeStamp = int
-
-type NETStateStack = List<NETState* TimeStamp>
