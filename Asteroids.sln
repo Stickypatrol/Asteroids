@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Asteroids", "Asteroids\Asteroids.fsproj", "{587C19E5-05C3-406B-A622-DF711790767A}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "AsteroidsClient", "AsteroidsClient\AsteroidsClient.fsproj", "{776DD429-F54B-44F9-96AF-ACCE262AA11E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,6 +18,10 @@ Global
 		{587C19E5-05C3-406B-A622-DF711790767A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{587C19E5-05C3-406B-A622-DF711790767A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{587C19E5-05C3-406B-A622-DF711790767A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{776DD429-F54B-44F9-96AF-ACCE262AA11E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{776DD429-F54B-44F9-96AF-ACCE262AA11E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{776DD429-F54B-44F9-96AF-ACCE262AA11E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{776DD429-F54B-44F9-96AF-ACCE262AA11E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
