@@ -37,7 +37,7 @@ let TestConnection (endpoint : IPEndPoint) (socket : Socket) =
           false
 
 //RECEIVE, SEND AND PARSE FUNCTIONS
-let ParseStateBytes bytes : NETState =
+let ParseStateBytes bytes : NetState =
   {Players = []; Asteroids = []; Projectiles = []; Time = 0}
   //parse the bytes here, this will be a moderately complicated operation
 
@@ -46,7 +46,7 @@ let ReceiveStateBytes (endpoint : IPEndPoint) (socket : Socket) =
   ignore <| socket.Receive(byteData)
   byteData
 
-let ByterizeState (state:NETState) =
+let ByterizeState (state:NetState) =
   Array.create 1000 (new Byte())
 
 let SendCurrentState (endpoint : IPEndPoint) (socket : Socket) curState =

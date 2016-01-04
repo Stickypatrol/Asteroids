@@ -1,14 +1,7 @@
 ﻿module NetworkInfo
 
 open Math
-
-type Body =
-  {
-    Position       : Vector2<p>
-    Velocity       : Vector2<p/s>
-    Dimensions     : Vector2<p>
-    Orientation    : float
-  }
+open Actors
 
 type NetPlayer =
   {

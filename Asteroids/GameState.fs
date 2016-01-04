@@ -18,7 +18,6 @@ type GameState =
     Asteroids      : ActorWrapper<Asteroid, GameState>
     Projectiles    : ActorWrapper<Projectile, GameState>
     Textures       : Map<string, Texture2D Option>
-    NetworkState   : NETState
   }
   with
   static member Disassemble gs =
