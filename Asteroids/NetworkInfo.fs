@@ -1,4 +1,4 @@
-﻿module ClientInfo
+﻿module NetworkInfo
 
 open Math
 
@@ -10,32 +10,34 @@ type Body =
     Orientation    : float
   }
 
-type NETPlayer =
+type NetPlayer =
   {
     Body          : Body
     Name          : string
   }
 
-type NETAsteroid =
+type NetAsteroid =
   {
     Body          : Body
+    Name          : string
   }
 
-type NETProjectile =
+type NetProjectile =
   {
     Body          : Body
+    Name          : string
   }
 
-type NETState =
+type NetState =
   {
-    Players        : List<NETPlayer>
-    Asteroids      : List<NETAsteroid>
-    Projectiles    : List<NETProjectile>
+    Players        : List<NetPlayer>
+    Asteroids      : List<NetAsteroid>
+    Projectiles    : List<NetProjectile>
   }
 
 type TimeStamp = int
 
-type NETStateStack = List<NETState* TimeStamp>
+type NetStateStack = List<NetState* TimeStamp>
 
 (*
 what we need to do is strip every state after execution to a NETState

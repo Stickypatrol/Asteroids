@@ -10,26 +10,28 @@ type Body =
     Orientation    : float
   }
 
-type NETPlayer =
+type NetPlayer =
   {
     Body          : Body
     Name          : string
   }
 
-type NETAsteroid =
+type NetAsteroid =
   {
     Body          : Body
+    Name          : string
   }
 
-type NETProjectile =
+type NetProjectile =
   {
     Body          : Body
+    Name          : string
   }
 
-type NETState =
+type NetState =
   {
-    Players        : List<NETPlayer>
-    Asteroids      : List<NETAsteroid>
-    Projectiles    : List<NETProjectile>
+    Players        : List<NetPlayer>
+    Asteroids      : List<NetAsteroid>
+    Projectiles    : List<NetProjectile>
     Time           : int
   }
