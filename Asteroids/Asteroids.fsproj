@@ -55,17 +55,16 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <None Include="App.config" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="StateMonad.fs" />
     <Compile Include="Media.fs" />
     <Compile Include="Math.fs" />
     <Compile Include="Input.fs" />
     <Compile Include="Actors.fs" />
-    <Compile Include="NetworkInfo.fs" />
     <Compile Include="GameState.fs" />
     <Compile Include="Game.fs" />
     <Compile Include="Program.fs" />
+    <None Include="App.config" />
     <Content Include="packages.config" />
     <None Include="Content\asteroid.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

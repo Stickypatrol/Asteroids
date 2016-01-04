@@ -37,7 +37,8 @@ type AsteroidsGame () as context =
     override context.Update gameTime =
         base.Update gameTime
         //here we run the mainUpdate function and return the 2nd(the state) item in the tuple it returns
-        gameState <- snd(GameState.GameUpdate (gameTime.ElapsedGameTime.Milliseconds |> toGameTime) gameState)
+        
+        //gameState <- cs.Run (GameState.GameUpdate (gameTime.ElapsedGameTime.Milliseconds |> toGameTime)) gameState
         ()
 
     override context.Draw gameTime =

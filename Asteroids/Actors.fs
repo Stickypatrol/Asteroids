@@ -145,11 +145,12 @@ type ActorWrapper<'a, 's> =
     Remove : 'a -> 's -> bool
   }
   with
-  static member UpdateAll dt (wrpr : ActorWrapper<'a, 's>) gs =
-    let Actors' = (wrpr.Create()) @ [for e in wrpr.Actors do
-                                      if not (wrpr.Remove e gs) then
-                                        let e' = wrpr.Update e dt
-                                        yield e']
-    {wrpr with Actors = Actors'}
+  static member UpdateAll dt (wrpr : ActorWrapper<'a, 's>) =
+    fun gs ->
+      let Actors' = (wrpr.Create()) @ [for e in wrpr.Actors do
+                                        if not (wrpr.Remove e gs) then
+                                          let e' = wrpr.Update e dt
+                                          yield e']
+      Done({wrpr with Actors = Actors'}, gs)
                   
 //changed the static functions to take the additional necessary parameters

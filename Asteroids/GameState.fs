@@ -10,7 +10,6 @@ open Actors
 open Math
 open Media
 open CstateMonad
-open NetworkInfo
 
 type GameState =
   {
@@ -20,17 +19,17 @@ type GameState =
     Textures       : Map<string, Texture2D Option>
   }
   with
-  static member Disassemble gs =
-    gs.Players, gs.Asteroids, gs.Projectiles, gs.Textures
-  static member GameUpdate (dt : float<s>) =
+  static member Disassemble =
     fun gs ->
-      let play, ast, proj, tex = GameState.Disassemble gs
-      let players' = ActorWrapper<Player, GameState>.UpdateAll dt play gs
-      let asteroids' = ActorWrapper<Asteroid, GameState>.UpdateAll dt ast gs
-      let projectiles' = ActorWrapper<Projectile, GameState>.UpdateAll dt proj gs
-      ((), {gs with Players = players'
-                    Asteroids = asteroids'
-                    Projectiles = projectiles'})
+      Done((gs.Players, gs.Asteroids, gs.Projectiles, gs.Textures), gs)
+  static member GameUpdate (dt : float<s>) =
+    cs{
+      let! play, ast, proj, _ = GameState.Disassemble
+      let! play' = ActorWrapper<Player, GameState>.UpdateAll dt play
+      let! ast' = ActorWrapper<Asteroid, GameState>.UpdateAll dt ast
+      let! proj' = ActorWrapper<Projectile, GameState>.UpdateAll dt proj
+      return play', ast', proj'
+    }
   static member GameDraw (gs : GameState) (sb : SpriteBatch) =
     let Draw =
       fun (b : Body) (name : string) ->

@@ -1,5 +1,5 @@
 ﻿module NetworkInfo
-
+//THIS FILE IS NOT USED IN THE ACTUAL GAME
 open Math
 open Actors
 
