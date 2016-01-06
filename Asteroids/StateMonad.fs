@@ -4,6 +4,7 @@
 
 module CstateMonad
 
+
 type Cstate<'a, 's> = 's -> CstateStep<'a, 's>
 and CstateStep<'a, 's> =
   | Done of 'a* 's
@@ -17,17 +18,13 @@ let rec (>>=) (p:Cstate<'a, 's>) (k:'a -> Cstate<'b, 's>) : Cstate<'b, 's> =
 
 let ret a = fun s -> Done(a, s)
 
-let rec unpack (c : Cstate<'a, 's>) =
-  fun s ->
-    match c s with
-    | Done (a, s) -> s
-    | Yield (c', s) -> unpack c' s
-
 type CstateBuilder () =
   member this.Return (a : 'a) = ret a
   member this.ReturnFrom (c : Cstate<'a, 's>) : Cstate<'a, 's> = c
   member this.Bind (p : Cstate<'a, 's>, k : 'a -> Cstate<'b, 's>) = p >>= k
-  member this.Run (c : Cstate<'a, 's>) = unpack c
-  member this.Separate (sep : 's -> 's1* 's2* 's3) = fun s -> sep s
-  member this.Join (join : 's1* 's2* 's3 -> 's) = fun 's1, 's2, 's3 -> join xs
+  member this.For (c : 'a -> Cstate<Unit, 's>, sl : seq<'a>) =
+    if (Seq.isEmpty sl) then
+      this.Return ()
+    else
+      (c (Seq.head sl)) >>= fun () -> this.For(c, (Seq.tail sl))
 let cs = CstateBuilder()

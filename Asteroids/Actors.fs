@@ -42,17 +42,19 @@ type Player =
     InputBehavior : InputBehavior<Player>
   }
   with
-  static member Update player dt =
-    let player' = ProcessInput player.InputBehavior player
-    let limitedPlayer =
-      {player' with Body =
-                    {player'.Body with  Velocity = LimitVecAbs (>) {X = 0.05<p/s>; Y = 0.05<p/s>} player'.Body.Velocity
-                                        Position = Middelize (LimitVecAbs (>) {X = 400.0<p>; Y = 240.0<p>})
-                                                                    {X = 400.0<p>; Y = 240.0<p>} player'.Body.Position}} //then clamps the speed to the limit for the ship
-    {limitedPlayer with//this function first updates the body of the object
-      Body = Body.Move limitedPlayer.Body dt}//and then applies the appropriate velocity
+  static member Update dt =
+    fun player ->
+      let player' = ProcessInput player.InputBehavior player
+      let limitedPlayer =
+        {player' with Body =
+                      {player'.Body with  Velocity = LimitVecAbs (>) {X = 0.05<p/s>; Y = 0.05<p/s>} player'.Body.Velocity
+                                          Position = Middelize (LimitVecAbs (>) {X = 400.0<p>; Y = 240.0<p>})
+                                                                      {X = 400.0<p>; Y = 240.0<p>} player'.Body.Position}} //then clamps the speed to the limit for the ship
+      Done({limitedPlayer with
+              Body = Body.Move limitedPlayer.Body dt}, player)
   static member Create () =
-    List<Player>.Empty//for now there is no create function, it just returns an empty list
+    fun s ->
+      Done(List<Player>.Empty, s)//for now there is no create function, it just returns an empty list
   static member Remove player world : bool =
     //check here for collision and health depletion
     false//for now it just always returns false
@@ -140,17 +142,24 @@ type Projectile =
 type ActorWrapper<'a, 's> =
   {
     Actors : 'a List
-    Update : 'a -> float<s> ->'a
+    Update : 'a -> float<s> -> Cstate<'a, 's>
     Create : Unit -> 'a List
     Remove : 'a -> 's -> bool
   }
   with
-  static member UpdateAll dt (wrpr : ActorWrapper<'a, 's>) =
-    fun gs ->
+  static member UpdateAll dt (wrpr : ActorWrapper<'a, 's>)=
+    cs{
+      let! created = wrpr.Create()
+      
+    }
+    
+    (*fun gs ->
       let Actors' = (wrpr.Create()) @ [for e in wrpr.Actors do
                                         if not (wrpr.Remove e gs) then
                                           let e' = wrpr.Update e dt
                                           yield e']
       Done({wrpr with Actors = Actors'}, gs)
-                  
-//changed the static functions to take the additional necessary parameters
+  (*we need to update each entity
+  remove the ones that need to be removed
+
+  *)

@@ -22,12 +22,17 @@ type GameState =
   static member Disassemble =
     fun gs ->
       Done((gs.Players, gs.Asteroids, gs.Projectiles, gs.Textures), gs)
+  static member Assemble play ast proj =
+    fun gs ->
+      let gs' = {gs with Players = play; Asteroids = ast; Projectiles = proj}
+      Done((), gs')
   static member GameUpdate (dt : float<s>) =
     cs{
       let! play, ast, proj, _ = GameState.Disassemble
-      let! play' = ActorWrapper<Player, GameState>.UpdateAll dt play
+      let play' = ActorWrapper<Player, GameState>.UpdateAll dt play
       let! ast' = ActorWrapper<Asteroid, GameState>.UpdateAll dt ast
       let! proj' = ActorWrapper<Projectile, GameState>.UpdateAll dt proj
+      do! GameState.Assemble play' ast' proj'
       return play', ast', proj'
     }
   static member GameDraw (gs : GameState) (sb : SpriteBatch) =
